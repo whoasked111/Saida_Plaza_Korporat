@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости и акции - ТЦ Saida Plaza</title>
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #cc0000;
+            --light-color: #f5f5f5;
+            --dark-color: #1a1a1a;
+            --gray-color: #e9e9e9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(204,0,0,0.1) 50%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(to bottom, #cc0000, #ff3333);
+            margin-right: 15px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(204,0,0,0.5);
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 21px;
+            width: calc(100% - 21px);
+            height: 2px;
+            background: linear-gradient(to right, #cc0000, transparent);
+            border-radius: 1px;
+        }
+        
+
+        
+        .breadcrumbs {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e9e9e9 100%);
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(204,0,0,0.1);
+        }
+        
+        .breadcrumbs ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumbs li {
+            margin-right: 15px;
+            position: relative;
+        }
+        
+        .breadcrumbs li:after {
+            content: "›";
+            margin-left: 15px;
+            color: #cc0000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .breadcrumbs li:last-child:after {
+            content: "";
+        }
+        
+        .breadcrumbs a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumbs a:hover {
+            color: #000;
+        }
+        
+        .page-title {
+            margin-bottom: 30px;
+        }
+        
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .filter-tab {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: var(--gray-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tab.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .search-box {
+            display: flex;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .news-date {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .news-excerpt {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .subscribe-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .subscribe-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .subscribe-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .subscribe-form input {
+            width: 70%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        
+        .subscribe-form button {
+            width: 30%;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .social-share {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .social-share span {
+            margin-right: 10px;
+        }
+        
+        .social-share a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 5px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .header-content {
+                padding: 15px 0;
+            }
+            
+            .news-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-column {
+                margin-bottom: 20px;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+                width: 90%;
+            }
+            
+            .subscribe-form input {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .subscribe-form button {
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Saida Plaza</div>
+
+        </div>
+    </header>
+    
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>Новости и акции</li>
+            </ul>
+        </div>
+    </div>
+    
+    <main class="container">
+        <h1 class="page-title">Новости и акции</h1>
+        
+        <div class="filter-section">
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">Все</div>
+                <div class="filter-tab" data-filter="promotions">Акции</div>
+                <div class="filter-tab" data-filter="events">События</div>
+                <div class="filter-tab" data-filter="news">Новости</div>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Поиск по новостям и акциям...">
+                <button>Найти</button>
+            </div>
+        </div>
+        
+        <div class="news-grid">
+            <!-- Акции -->
+            <div class="news-card" data-category="promotions">
+                <div class="news-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoNrhtsj9SeQdej9odu2QlheFifJ0VS818jt-zJY0IiOoiSOZrssRwDfPeW85gxJPT82o&usqp=CAU" alt="Юбилей Saida Plaza">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Акция</span>
+                    <h3 class="news-title">Юбилейные скидки в честь 10-летия Saida Plaza</h3>
+                    <p class="news-date">27 апреля 2025</p>
+                    <p class="news-excerpt">В честь 10-летия торгового центра Saida Plaza действуют скидки до 70%. Специальные предложения и подарки каждому покупателю!</p>
+                </div>
+            </div>
+            <!-- Акции -->
+            <div class="news-card" data-category="promotions">
+                <div class="news-image">
+                    <img src="https://i.pinimg.com/236x/96/db/54/96db5429620ba84916c88bf4336e56e3.jpg" alt="Фитнес-студия Ems Studio">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Акция</span>
+                    <h3 class="news-title">Розыгрыш годовых абонементов от Ems Studio</h3>
+                    <p class="news-date">29 апреля 2025</p>
+                    <p class="news-excerpt">Фитнес-студия Ems Studio проводит розыгрыш годовых абонементов среди всех посетителей! Прими участие — получи шанс тренироваться бесплатно весь год.</p>
+                </div>
+            </div>
+
+            <!-- События -->
+            <div class="news-card" data-category="events">
+                <div class="news-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5H7TQcZVCEr78XlDHgFLN3tJbQTSGHcIHEcxop9Pd4H7Ha5y1Aw-UWH2vatokrZ3oQww&usqp=CAU" alt="Концерт в Saida Plaza">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Событие</span>
+                    <h3 class="news-title">Концерт звезд эстрады в атриуме Saida Plaza</h3>
+                    <p class="news-date">23 апреля 2025</p>
+                    <p class="news-excerpt">В рамках празднования 10-летия торгового центра приглашаем всех на грандиозный концерт с участием звезд казахстанской эстрады в центральном атриуме.</p>
+                </div>
+            </div>
+
+            <!-- Новости -->
+            <div class="news-card" data-category="news">
+                <div class="news-image">
+                    <img src="https://images.homify.com/c_fill,f_auto,h_700,q_auto/v1623399669/p/photo/image/3873757/%D0%A1%D1%83%D0%BF%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%D0%B5%D1%80_2_%D0%B7%D0%B0%D0%BB_04.jpg" alt="Новый фуд-корт в Saida Plaza">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Новость</span>
+                    <h3 class="news-title">Обновленный Velvet Burger Saida Plaza открывает двери</h3>
+                    <p class="news-date">19 апреля 2025</p>
+                    <p class="news-excerpt">После масштабной реконструкции открылся полностью обновленный Velvet Burger. Уникальный дизайн и комфортные зоны отдыха.</p>
+                </div>
+            </div>
+
+            <!-- Новости -->
+            <div class="news-card" data-category="news">
+                <div class="news-image">
+                    <img src="https://avatars.mds.yandex.net/get-altay/5480011/2a0000017de6a2d8376df3c57a9b63f1c916/XL" alt="Saida Plaza получила награду">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Новость</span>
+                    <h3 class="news-title">Saida Plaza признана лучшим торговым центром Павлодара</h3>
+                    <p class="news-date">8 апреля 2025</p>
+                    <p class="news-excerpt">По результатам ежегодного городского конкурса наш торговый центр получил премию «Лучший торговый центр года» за высокий уровень сервиса и инновационный подход.</p>
+                </div>
+            </div>
+
+            <!-- События -->
+            <div class="news-card" data-category="events">
+                <div class="news-image">
+                    <img src="https://i.pinimg.com/736x/b3/44/c1/b344c154782a1577f43fec99395cddac.jpg" alt="Фестиваль в Saida Plaza">
+                </div>
+                <div class="news-content">
+                    <span class="news-category">Событие</span>
+                    <h3 class="news-title">Весений Банкет в Saida Plaza</h3>
+                    <p class="news-date">3 апреля 2025</p>
+                    <p class="news-excerpt">В торговом центре Saida Plaza прошёл яркий весенний банкет! Гостей ждали вкусные угощения, живая музыка и праздничная атмосфера,кто хотел приятно провести время в тёплой и уютной обстановке.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Перемещено из grid и размещено как отдельная секция -->
+        <div class="subscribe-section">
+            <div class="container">
+                <h2 class="subscribe-title">Подпишитесь на новости и акции</h2>
+                <p>Будьте в курсе последних новостей и получайте информацию о скидках и акциях первыми!</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Ваш email" required>
+                    <button type="submit">Подписаться</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>г. Павлодар, ул. Кутузова 60/5</p>
+                    <p>Тел.: +7 (123) 456-78-90</p>
+                    <p>Email: info@saidaplaza.kz</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ТЦ Saida Plaza. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Фильтрация новостей
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Удаляем класс active у всех вкладок
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    // Добавляем класс active текущей вкладке
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Фильтруем карточки новостей
+                    newsCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Поиск по новостям
+            const searchInput = document.querySelector('.search-box input');
+            const searchButton = document.querySelector('.search-box button');
+            
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                newsCards.forEach(card => {
+                    const title = card.querySelector('.news-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.news-excerpt').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Форма подписки
+            const subscribeForm = document.querySelector('.subscribe-form');
+            
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                
+                // Здесь должен быть код для отправки email на сервер
+                alert('Спасибо за подписку! На ваш адрес ' + email + ' будут приходить интересные уведомления =)');
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>

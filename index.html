@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saida Plaza - Торговый центр в Павлодаре</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-color: #000000;
+            --accent-color: #ff0000;
+            --accent-gradient: linear-gradient(135deg, #ff0000, #cc0000);
+            --light-color: #f8fafc;
+            --dark-color: #0f172a;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Modern Header with Glassmorphism */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .contact-info i {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section with Modern Gradient */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,0,0,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .hero-content .accent-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.4);
+        }
+        
+        /* Keep existing styles for all other sections */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .about-section {
+            background: white;
+            position: relative;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--dark-color);
+        }
+        
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            color: var(--text-light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 0, 0, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .feature i {
+            font-size: 20px;
+            color: var(--accent-color);
+            width: 24px;
+        }
+        
+        .services-section {
+            background: var(--light-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-info {
+            padding: 32px;
+        }
+        
+        .service-info h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark-color);
+        }
+        
+        .service-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .service-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .service-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-color);
+            background: var(--light-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+        
+        .service-detail i {
+            color: var(--accent-color);
+            font-size: 12px;
+        }
+        
+        .news-section {
+            background: white;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+        
+        .news-info {
+            padding: 24px;
+        }
+        
+        .news-date {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .news-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark-color);
+            line-height: 1.4;
+        }
+        
+        .news-description {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .map-section {
+            background: var(--light-color);
+        }
+        
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .contact-info-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            height: fit-content;
+        }
+        
+        .contact-info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--dark-color);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 12px 0;
+        }
+        
+        .contact-item i {
+            width: 24px;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+        
+        .contact-item span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .map-frame {
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        
+        .map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .address-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .address-overlay h4 {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--dark-color);
+        }
+        
+        .address-overlay p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        .hours-section {
+            background: var(--dark-color);
+            color: white;
+        }
+        
+        .hours-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hours-container h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .hours-container p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+        
+        .hours-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .hours-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+        
+        .hours-item strong {
+            display: block;
+            color: var(--accent-color);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .hours-item span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: white;
+        }
+        
+        .footer-column p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .contact-info {
+                font-size: 12px;
+                gap: 16px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content,
+            .map-container {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .services-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hours-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Saida Plaza</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index1.html">Новости</a></li>
+                        <li><a href="index2.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +7 (705) 645 0969</span>
+                    <span><i class="fas fa-clock"></i> 10:00-22:00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modern Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Добро пожаловать в<br><span class="accent-text">Saida Plaza</span></h1>
+            <p>Современный торговый центр в сердце Павлодара с лучшими брендами и развлечениями</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">О торговом центре</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://avatars.mds.yandex.net/get-altay/5457654/2a0000017de6a2dffdda0ea694cb16a78a11/L_height" alt="Saida Plaza interior">
+                </div>
+                <div class="about-text">
+                    <p>Торговый центр Saida Plaza - это современный многофункциональный комплекс, расположенный в центре города Павлодар. Наш торговый центр предлагает широкий выбор магазинов, ресторанов и развлечений для всей семьи.</p>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Velvet Burger с авторскими Бургерами</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>Бесплатная парковка</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-child"></i>
+                            <span>Детская игровая зона</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Фитнес-студия</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-glass-cheers"></i>
+                            <span>Банкетный зал</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services Section -->
+    <section class="featured-services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://i1.photo.2gis.com/images/branch/111/15621861255704201_693c.jpg" alt="Банкетный зал">
+                    </div>
+                    <div class="service-info">
+                        <h3>Банкетный зал "Saida Hall"</h3>
+                        <p class="service-description">Роскошный банкетный зал для проведения торжественных мероприятий, свадеб, корпоративных встреч и семейных праздников. Профессиональное обслуживание и изысканное меню сделают ваше событие незабываемым.</p>
+                        <div class="service-details">
+                            <div class="service-detail">
+                                <i class="fas fa-users"></i> Вместимость до 200 человек
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-utensils"></i> Собственная кухня
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-music"></i> Звуковое оборудование
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://www.foodeq.ru/upload/medialibrary/f93/image-0-02-05-f62657eadaa404f1e7582ba937742db1eb3331410658988c7a6a2f84ad72a6c1-V.jpg" alt="Velvet Burger">
+                    </div>
+                    <div class="service-info">
+                        <h3>Velvet Burger</h3>
+                        <p class="service-description">Новый ресторан быстрого питания с концепцией премиальных бургеров. В меню представлены авторские бургеры из натуральной говядины, вегетарианские опции, картофель фри и разнообразные напитки.</p>
+                        <div class="service-details">
+                            <div class="service-detail">
+                                <i class="fas fa-hamburger"></i> Авторские бургеры
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-leaf"></i> Вегетарианские опции
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-clock"></i> Работаем до 23:00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://justfitart.com/wp-content/uploads/2020/02/ems-studio-training-basics.jpg" alt="EMS Studio">
+                    </div>
+                    <div class="service-info">
+                        <h3>Фитнес-студия EMS Studio</h3>
+                        <p class="service-description">Инновационная фитнес-студия с технологией EMS-тренировок (электромиостимуляция). 20 минут тренировки в EMS Studio заменяют 2-3 часа обычных занятий в тренажерном зале! Индивидуальный подход для каждого клиента.</p>
+                        <div class="service-details">
+                            <div class="service-detail">
+                                <i class="fas fa-bolt"></i> EMS-технология
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-user-friends"></i> Профессиональные тренеры
+                            </div>
+                            <div class="service-detail">
+                                <i class="fas fa-calendar-alt"></i> Запись по предварительной записи
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="news">
+        <div class="container">
+            <h2 class="section-title">Новости и акции</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://www.foodeq.ru/upload/medialibrary/f93/image-0-02-05-f62657eadaa404f1e7582ba937742db1eb3331410658988c7a6a2f84ad72a6c1-V.jpg" alt="News 1">
+                    </div>
+                    <div class="news-info">
+                        <div class="news-date">25 апреля 2025</div>
+                        <h3>Открытие Velvet Burger</h3>
+                        <p class="news-description">Приглашаем на торжественное открытие нового ресторана Velvet Burger! Первым 50 посетителям - фирменный бургер в подарок!</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://justfitart.com/wp-content/uploads/2020/02/ems-studio-training-basics.jpg" alt="News 2">
+                    </div>
+                    <div class="news-info">
+                        <div class="news-date">20 апреля 2025</div>
+                        <h3>Пробная тренировка в EMS Studio</h3>
+                        <p class="news-description">Новая фитнес-студия EMS Studio предлагает всем желающим пробную тренировку по специальной цене! Записывайтесь и испытайте эффективность EMS-технологии!</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://i1.photo.2gis.com/images/branch/111/15621861255704201_693c.jpg" alt="News 3">
+                    </div>
+                    <div class="news-info">
+                        <div class="news-date">15 апреля 2025</div>
+                        <h3>Банкетный зал Saida Hall</h3>
+                        <p class="news-description">Роскошный банкетный зал для проведения торжественных мероприятий, свадеб, корпоративных встреч и семейных праздников. Профессиональное обслуживание и изысканное меню сделают ваше событие незабываемым.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="index1.html" class="btn">Все новости и акции</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Как нас найти</h2>
+            <div class="map-container">
+                <div class="map-info">
+                    <h3>Контактная информация</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Казахстан, г. Павлодар, ул. Кутузова 60/5</p>
+                    <p><i class="fas fa-phone"></i> +7 (7182) 12-34-56</p>
+                    <p><i class="fas fa-envelope"></i> info@saidaplaza.kz</p>
+                    <p><i class="fas fa-bus"></i> Автобусы: 10, 18, 25, 40</p>
+                    <p><i class="fas fa-car"></i> Бесплатная парковка на 50 мест</p>
+                </div>
+                <div class="contact-map" style="position: relative; width: 100%; height: 350px; max-width: 800px; margin: 0 auto;">
+                    <!-- Интерактивная карта Google Maps -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.7901214532327!2d76.96658511568574!3d52.26495979976591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42f9cb7963e15f35%3A0x24008b19bb185836!2sSaida%20Plaza!5e0!3m2!1sru!2skz!4v1619683654780!5m2!1sru!2skz" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                    
+                    <!-- Блок с адресом поверх карты -->
+                    <div class="address-overlay" style="position: absolute; bottom: 18px; left: 18px; background-color: rgba(255, 255, 255, 0.9); padding: 12px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 10;">
+                        <h4 style="margin: 0 0 4px 0; font-weight: 600; font-size: 15px;">Наш адрес:</h4>
+                        <p style="margin: 0; font-size: 14px;">г. Павлодар, Проспект Назарбаева 60/5, ТЦ Saida Plaza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours of Operation -->
+    <section class="hours">
+        <div class="container">
+            <div class="hours-container">
+                <h2>Часы работы</h2>
+                <p>Мы рады видеть вас в нашем торговом центре каждый день:</p>
+                <div class="hours-list">
+                    <div class="hours-item">
+                        <strong>Пн-Пт</strong>
+                        10:00 - 22:00
+                    </div>
+                    <div class="hours-item">
+                        <strong>Сб-Вс</strong>
+                        10:00 - 23:00
+                    </div>
+                    <div class="hours-item">
+                        <strong>Velvet Burger</strong>
+                        10:00 - 23:00
+                    </div>
+                    <div class="hours-item">
+                        <strong>EMS Studio</strong>
+                        09:00 - 21:00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Saida Plaza</h3>
+                    <p>Современный торговый центр в сердце Павлодара с лучшими брендами и развлечениями для всей семьи.</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index1.html">Новости</a></li>
+                        <li><a href="index2.html">Контакты</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Saida Plaza. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+</body>
+</html>

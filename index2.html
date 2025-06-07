@@ -1,0 +1,918 @@
+
+        <!DOCTYPE html>
+        <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Контакты - ТЦ Saida Plaza</title>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+                
+                :root {
+                    --primary-color: #000000;
+                    --accent-color: #ff0000;
+                    --light-color: #f8fafc;
+                    --dark-color: #0f172a;
+                    --text-color: #334155;
+                    --border-color: #e2e8f0;
+                    --gray-50: #f8fafc;
+                    --gray-100: #f1f5f9;
+                    --gray-200: #e2e8f0;
+                    --gray-300: #cbd5e1;
+                    --gray-400: #94a3b8;
+                    --gray-500: #64748b;
+                    --gray-600: #475569;
+                    --gray-700: #334155;
+                    --gray-800: #1e293b;
+                    --gray-900: #0f172a;
+                    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+                    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+                    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+                    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+                    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+                }
+                
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                
+                body {
+                    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+                    color: var(--text-color);
+                    line-height: 1.6;
+                    font-weight: 400;
+                }
+                
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                }
+                
+                header {
+                    background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+                    color: white;
+                    padding: 20px 0;
+                    box-shadow: var(--shadow-lg);
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                header::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(45deg, transparent 0%, rgba(255, 0, 0, 0.1) 50%, transparent 100%);
+                    animation: shimmer 3s infinite;
+                }
+                
+                @keyframes shimmer {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+                
+                .header-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .logo {
+                    font-size: 28px;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+                
+                .breadcrumbs {
+                    background: rgba(255, 255, 255, 0.8);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border-bottom: 1px solid var(--border-color);
+                    padding: 12px 0;
+                    margin-bottom: 40px;
+                }
+                
+                .breadcrumbs ul {
+                    list-style: none;
+                    display: flex;
+                    align-items: center;
+                }
+                
+                .breadcrumbs li {
+                    margin-right: 8px;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                
+                .breadcrumbs li:after {
+                    content: "→";
+                    margin-left: 8px;
+                    color: var(--gray-400);
+                    font-weight: 400;
+                }
+                
+                .breadcrumbs li:last-child:after {
+                    content: "";
+                }
+                
+                .breadcrumbs a {
+                    color: var(--gray-600);
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+                }
+                
+                .breadcrumbs a:hover {
+                    color: var(--accent-color);
+                }
+                
+                .page-title {
+                    margin-bottom: 40px;
+                    font-size: 48px;
+                    font-weight: 700;
+                    color: var(--dark-color);
+                    letter-spacing: -1px;
+                    background: linear-gradient(135deg, var(--primary-color) 0%, var(--gray-700) 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+                
+                .contact-section {
+                    display: grid;
+                    grid-template-columns: 1fr 2fr;
+                    gap: 40px;
+                    margin-bottom: 60px;
+                }
+                
+                .contact-info {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    padding: 40px;
+                    border-radius: 24px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: var(--shadow-xl);
+                    transition: all 0.3s ease;
+                }
+                
+                .contact-info:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                }
+                
+                .contact-map {
+                    height: 500px;
+                    border-radius: 24px;
+                    overflow: hidden;
+                    box-shadow: var(--shadow-xl);
+                    position: relative;
+                    transition: all 0.3s ease;
+                }
+                
+                .contact-map:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                }
+                
+                .info-block {
+                    margin-bottom: 32px;
+                }
+                
+                .info-block:last-child {
+                    margin-bottom: 0;
+                }
+                
+                .info-block h3 {
+                    color: var(--primary-color);
+                    margin-bottom: 16px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    letter-spacing: -0.3px;
+                }
+                
+                .info-item {
+                    display: flex;
+                    align-items: flex-start;
+                    margin-bottom: 12px;
+                    padding: 16px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 16px;
+                    transition: all 0.2s ease;
+                }
+                
+                .info-item:hover {
+                    background: rgba(255, 255, 255, 0.8);
+                    transform: translateX(4px);
+                }
+                
+                .info-icon {
+                    width: 32px;
+                    height: 32px;
+                    background: linear-gradient(135deg, var(--accent-color) 0%, #cc0000 100%);
+                    border-radius: 12px;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 16px;
+                    font-size: 16px;
+                    box-shadow: var(--shadow-md);
+                    flex-shrink: 0;
+                }
+                
+                .info-item div p {
+                    font-weight: 500;
+                    color: var(--gray-700);
+                    margin-bottom: 4px;
+                }
+                
+                .info-item div p:last-child {
+                    margin-bottom: 0;
+                }
+                
+                .contact-form-section {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    border-radius: 24px;
+                    padding: 40px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: var(--shadow-xl);
+                    margin-bottom: 60px;
+                    transition: all 0.3s ease;
+                }
+                
+                .contact-form-section:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                }
+                
+                .contact-form-section h2 {
+                    margin-bottom: 32px;
+                    color: var(--primary-color);
+                    font-size: 32px;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                }
+                
+                .contact-form {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px;
+                }
+                
+                .form-group {
+                    margin-bottom: 0;
+                }
+                
+                .form-group.full-width {
+                    grid-column: span 2;
+                }
+                
+                .form-group label {
+                    display: block;
+                    margin-bottom: 8px;
+                    font-weight: 600;
+                    color: var(--gray-700);
+                    font-size: 14px;
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+                }
+                
+                .form-group input,
+                .form-group textarea,
+                .form-group select {
+                    width: 100%;
+                    padding: 16px 20px;
+                    border: 2px solid var(--gray-200);
+                    border-radius: 16px;
+                    font-size: 16px;
+                    font-family: inherit;
+                    background: rgba(255, 255, 255, 0.8);
+                    transition: all 0.2s ease;
+                    backdrop-filter: blur(10px);
+                }
+                
+                .form-group input:focus,
+                .form-group textarea:focus,
+                .form-group select:focus {
+                    outline: none;
+                    border-color: var(--accent-color);
+                    box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.1);
+                    background: rgba(255, 255, 255, 0.95);
+                }
+                
+                .form-group textarea {
+                    min-height: 150px;
+                    resize: vertical;
+                }
+                
+                .submit-btn {
+                    padding: 16px 32px;
+                    background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+                    color: white;
+                    border: none;
+                    border-radius: 16px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: 600;
+                    transition: all 0.2s ease;
+                    box-shadow: var(--shadow-lg);
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+                }
+                
+                .submit-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                    background: linear-gradient(135deg, #1a1a1a 0%, var(--primary-color) 100%);
+                }
+                
+                .submit-btn:active {
+                    transform: translateY(0);
+                }
+                
+                .business-hours {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    border-radius: 24px;
+                    padding: 40px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: var(--shadow-xl);
+                    margin-bottom: 60px;
+                    transition: all 0.3s ease;
+                }
+                
+                .business-hours:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                }
+                
+                .business-hours h2 {
+                    margin-bottom: 32px;
+                    color: var(--primary-color);
+                    font-size: 32px;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                }
+                
+                .hours-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 24px;
+                }
+                
+                .hours-item {
+                    padding: 24px;
+                    background: rgba(255, 255, 255, 0.6);
+                    border-radius: 20px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                }
+                
+                .hours-item:hover {
+                    transform: translateY(-4px);
+                    background: rgba(255, 255, 255, 0.9);
+                    box-shadow: var(--shadow-lg);
+                }
+                
+                .hours-item h3 {
+                    margin-bottom: 12px;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+                
+                .hours-item p {
+                    font-weight: 600;
+                    color: var(--gray-700);
+                    font-size: 16px;
+                }
+                
+                .departments-section {
+                    margin-bottom: 60px;
+                }
+                
+                .departments-section h2 {
+                    margin-bottom: 32px;
+                    color: var(--primary-color);
+                    font-size: 32px;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                }
+                
+                .departments-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                    gap: 24px;
+                }
+                
+                .department-item {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    border-radius: 20px;
+                    padding: 32px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    box-shadow: var(--shadow-lg);
+                    transition: all 0.3s ease;
+                }
+                
+                .department-item:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+                }
+                
+                .department-item h3 {
+                    color: var(--primary-color);
+                    margin-bottom: 12px;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+                
+                .department-item p {
+                    color: var(--gray-600);
+                    margin-bottom: 20px;
+                    font-weight: 500;
+                }
+                
+                .department-contacts {
+                    margin-top: 20px;
+                }
+                
+                .department-contact {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 12px;
+                    padding: 12px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 12px;
+                    transition: all 0.2s ease;
+                }
+                
+                .department-contact:hover {
+                    background: rgba(255, 255, 255, 0.8);
+                    transform: translateX(4px);
+                }
+                
+                .contact-icon {
+                    margin-right: 12px;
+                    color: var(--accent-color);
+                    font-size: 16px;
+                }
+                
+                .department-contact span:last-child {
+                    font-weight: 500;
+                    color: var(--gray-700);
+                }
+                
+                .address-overlay {
+                    position: absolute;
+                    bottom: 24px;
+                    left: 24px;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    padding: 20px;
+                    border-radius: 16px;
+                    box-shadow: var(--shadow-xl);
+                    z-index: 10;
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                }
+                
+                .address-overlay h4 {
+                    margin: 0 0 8px 0;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }
+                
+                .address-overlay p {
+                    margin: 0;
+                    font-size: 16px;
+                    color: var(--gray-700);
+                    font-weight: 500;
+                }
+                
+                footer {
+                    background: linear-gradient(135deg, var(--dark-color) 0%, #1a1a1a 100%);
+                    color: white;
+                    padding: 40px 0;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                footer::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(45deg, transparent 0%, rgba(255, 0, 0, 0.05) 50%, transparent 100%);
+                    animation: shimmer 4s infinite;
+                }
+                
+                .footer-content {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 24px;
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .footer-column {
+                    flex: 1;
+                    padding: 0 20px;
+                }
+                
+                .footer-column h3 {
+                    margin-bottom: 16px;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+                
+                .footer-column p {
+                    color: #cbd5e1;
+                    margin-bottom: 8px;
+                    font-weight: 500;
+                }
+                
+                .footer-bottom {
+                    text-align: center;
+                    padding-top: 24px;
+                    border-top: 1px solid #374151;
+                    color: #9ca3af;
+                    font-weight: 500;
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                /* Responsive Design */
+                @media (max-width: 1024px) {
+                    .contact-section {
+                        grid-template-columns: 1fr;
+                        gap: 32px;
+                    }
+                    
+                    .contact-map {
+                        height: 400px;
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .container {
+                        padding: 0 16px;
+                    }
+                    
+                    .page-title {
+                        font-size: 36px;
+                        margin-bottom: 32px;
+                    }
+                    
+                    .contact-form {
+                        grid-template-columns: 1fr;
+                        gap: 20px;
+                    }
+                    
+                    .form-group.full-width {
+                        grid-column: span 1;
+                    }
+                    
+                    .footer-content {
+                        flex-direction: column;
+                        gap: 24px;
+                    }
+                    
+                    .footer-column {
+                        padding: 0;
+                    }
+                    
+                    .contact-info,
+                    .contact-form-section,
+                    .business-hours {
+                        padding: 24px;
+                    }
+                    
+                    .department-item {
+                        padding: 24px;
+                    }
+                    
+                    .hours-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    
+                    .departments-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .page-title {
+                        font-size: 28px;
+                    }
+                    
+                    .contact-form-section h2,
+                    .business-hours h2,
+                    .departments-section h2 {
+                        font-size: 24px;
+                    }
+                    
+                    .address-overlay {
+                        left: 16px;
+                        right: 16px;
+                        bottom: 16px;
+                        padding: 16px;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <header>
+                <div class="container header-content">
+                    <div class="logo">Saida Plaza</div>
+                    <nav>
+                        <ul>
+                            <!-- Навигация будет добавлена позже -->
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            
+            <div class="breadcrumbs">
+                <div class="container">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li>Контакты</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <main class="container">
+                <h1 class="page-title">Контакты</h1>
+                
+                <section class="contact-section">
+                    <div class="contact-info">
+                        <div class="info-block">
+                            <h3>Адрес</h3>
+                            <div class="info-item">
+                                <div class="info-icon">📍</div>
+                                <div>
+                                    <p>г. Павлодар, ул. Кутузова 60/5</p>
+                                    <p>140000, Республика Казахстан</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3>Телефоны</h3>
+                            <div class="info-item">
+                                <div class="info-icon">📞</div>
+                                <div>
+                                    <p>Администрация: +7 (123) 456-78-90</p>
+                                    <p>Аренда: +7 (123) 456-78-91</p>
+                                    <p>Охрана: +7 (123) 456-78-92</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-block">
+                            <h3>Email</h3>
+                            <div class="info-item">
+                                <div class="info-icon">✉️</div>
+                                <div>
+                                    <p>Общие вопросы: info@saidaplaza.kz</p>
+                                    <p>Аренда: rent@saidaplaza.kz</p>
+                                    <p>Маркетинг: marketing@saidaplaza.kz</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-map">
+                        <!-- Интерактивная карта Google Maps -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.7901214532327!2d76.96658511568574!3d52.26495979976591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42f9cb7963e15f35%3A0x24008b19bb185836!2sSaida%20Plaza!5e0!3m2!1sru!2skz!4v1619683654780!5m2!1sru!2skz" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                        
+                        <!-- Блок с адресом поверх карты -->
+                        <div class="address-overlay">
+                            <h4>Наш адрес:</h4>
+                            <p>г. Павлодар, Проспект Назарбаева 60/5, ТЦ Saida Plaza</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="contact-form-section">
+                    <h2>Напишите нам</h2>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Имя*</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="topic">Тема обращения</label>
+                            <select id="topic" name="topic">
+                                <option value="general">Общий вопрос</option>
+                                <option value="advertisement">Рекламные возможности</option>
+                                <option value="rent">Аренда помещений</option>
+                                <option value="job">Вакансии</option>
+                                <option value="cooperation">Сотрудничество</option>
+                                <option value="complaint">Жалоба</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="message">Сообщение*</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="submit-btn">Отправить</button>
+                        </div>
+                    </form>
+                </section>
+                
+                <section class="business-hours">
+                    <h2>Часы работы</h2>
+                    <div class="hours-grid">
+                        <div class="hours-item">
+                            <h3>Торговый центр</h3>
+                            <p>Пн-Вс: 10:00 - 22:00</p>
+                        </div>
+                        
+                        <div class="hours-item">
+                            <h3>Velvet Burger</h3>
+                            <p>Пн-Вс: 10:00 - 23:00</p>
+                        </div>
+                        
+                        <div class="hours-item">
+                            <h3>Администрация</h3>
+                            <p>Пн-Пт: 09:00 - 18:00</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="departments-section">
+                    <h2>Отделы и службы</h2>
+                    <div class="departments-grid">
+                        <div class="department-item">
+                            <h3>Администрация</h3>
+                            <p>Управление торговым центром, общие вопросы</p>
+                            <div class="department-contacts">
+                                <div class="department-contact">
+                                    <span class="contact-icon">📞</span>
+                                    <span>+7 (123) 456-78-90</span>
+                                </div>
+                                <div class="department-contact">
+                                    <span class="contact-icon">✉️</span>
+                                    <span>admin@saidaplaza.kz</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="department-item">
+                            <h3>Отдел аренды</h3>
+                            <p>Аренда торговых и офисных помещений</p>
+                            <div class="department-contacts">
+                                <div class="department-contact">
+                                    <span class="contact-icon">📞</span>
+                                    <span>+7 (123) 456-78-91</span>
+                                </div>
+                                <div class="department-contact">
+                                    <span class="contact-icon">✉️</span>
+                                    <span>rent@saidaplaza.kz</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="department-item">
+                            <h3>Маркетинг и реклама</h3>
+                            <p>Размещение рекламы, проведение акций и мероприятий</p>
+                            <div class="department-contacts">
+                                <div class="department-contact">
+                                    <span class="contact-icon">📞</span>
+                                    <span>+7 (123) 456-78-93</span>
+                                </div>
+                                <div class="department-contact">
+                                    <span class="contact-icon">✉️</span>
+                                    <span>marketing@saidaplaza.kz</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="department-item">
+                            <h3>Служба безопасности</h3>
+                            <p>Обеспечение безопасности и охрана порядка</p>
+                            <div class="department-contacts">
+                                <div class="department-contact">
+                                    <span class="contact-icon">📞</span>
+                                    <span>+7 (123) 456-78-92</span>
+                                </div>
+                                <div class="department-contact">
+                                    <span class="contact-icon">✉️</span>
+                                    <span>security@saidaplaza.kz</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </main>
+                
+                <footer>
+                    <div class="container">
+                        <div class="footer-content">
+                            <div class="footer-column">
+                                <h3>Контакты</h3>
+                                <p>г. Павлодар, ул. Кутузова 60/5</p>
+                                <p>Тел.: +7 (123) 456-78-90</p>
+                                <p>Email: info@saidaplaza.kz</p>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <p>&copy; 2025 ТЦ Saida Plaza. Все права защищены.</p>
+                        </div>
+                    </div>
+                </footer>
+                
+                <script>
+                    // Валидация формы обратной связи
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const contactForm = document.querySelector('.contact-form');
+                        
+                        if (contactForm) {
+                            contactForm.addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                
+                                const nameField = document.getElementById('name');
+                                const emailField = document.getElementById('email');
+                                const messageField = document.getElementById('message');
+                                
+                                let isValid = true;
+                                
+                                // Проверка имени
+                                if (!nameField.value.trim()) {
+                                    isValid = false;
+                                    nameField.style.borderColor = 'red';
+                                } else {
+                                    nameField.style.borderColor = '#ddd';
+                                }
+                                
+                                // Проверка email
+                                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailPattern.test(emailField.value)) {
+                                    isValid = false;
+                                    emailField.style.borderColor = 'red';
+                                } else {
+                                    emailField.style.borderColor = '#ddd';
+                                }
+                                
+                                // Проверка сообщения
+                                if (!messageField.value.trim()) {
+                                    isValid = false;
+                                    messageField.style.borderColor = 'red';
+                                } else {
+                                    messageField.style.borderColor = '#ddd';
+                                }
+                                
+                                if (isValid) {
+                                    // В реальном проекте здесь был бы AJAX-запрос для отправки формы
+                                    alert('Спасибо за обращение! Мы свяжемся с вами в ближайшее время =)');
+                                    contactForm.reset();
+                                } else {
+                                    alert('Пожалуйста, заполните все обязательные поля корректно.');
+                                }
+                            });
+                        }
+                    });
+                </script>
+                </body>
+                </html>
